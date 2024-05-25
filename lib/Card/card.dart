@@ -29,7 +29,7 @@ class _CardBlockState extends State<CardBlock> {
     return Container(
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.only(top: 10),
-      color: Colors.teal[100],
+      // color: Colors.teal[100],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

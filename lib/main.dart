@@ -13,11 +13,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 58, 102, 183), background: const Color.fromARGB(255, 0, 4, 255)),
-        // scaffoldBackgroundColor: const Color.fromARGB(255, 136, 255, 0),
-        primaryColor: Colors.blue,
-        useMaterial3: true,
-      ),
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.cyanAccent),
+          scaffoldBackgroundColor: Colors.cyan,
+          primaryColor: Colors.blue,
+          dividerTheme: const DividerThemeData(
+              color: Colors.white, space: 30, thickness: 3),
+          listTileTheme: const ListTileThemeData(iconColor: Colors.white),
+          textTheme: const TextTheme(
+              bodyMedium: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              bodySmall: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+          useMaterial3: true),
       home: const MyHomePage(title: 'CRUD App'),
     );
   }
@@ -35,14 +40,31 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: listCardBlock,
-      ),
+      body: ListView.separated(
+          itemCount: listCardBlock.length,
+          separatorBuilder: (context, index) => const Divider(),
+          itemBuilder: (context, i) => ListTile(
+                // leading: SvgPicture.asset('assets/svg/cube.svg'),
+                leading: const Icon(Icons.check_box_outline_blank_sharp),
+                title: Text(
+                  '$i',
+                  style: theme.textTheme.bodyMedium,
+                ),
+                subtitle: Text(
+                  'context',
+                  style: theme.textTheme.bodySmall,
+                ),
+                trailing: const Icon(
+                  Icons.arrow_right,
+                  size: 40,
+                ),
+              )),
     );
   }
 }
